@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -18,6 +19,7 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ Storage::url('assets/images/favicon.ico') }}" />
 </head>
+
 <body>
     <!--Slicing starts from here-->
     <div class="container-scroller">
@@ -58,7 +60,7 @@
                         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="nav-profile-text">
-                                <p class="mb-1 text-black">David Greymaax</p>
+                                <p class="mb-1 text-black">{{ Auth::user()->name }}</p>
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -88,9 +90,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
-                            <span class="menu-title">Logout</span>
-                            <i class="mdi mdi-logout menu-icon"></i>
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                            <i class="mdi mdi-logout me-2 text-primary"></i> Logout </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                         </a>
                     </li>
                 </ul>
@@ -104,18 +110,15 @@
                             </span> Dashboard
                         </h3>
                     </div>
-                   <div class="row">
-                    @yield('content')
-                   </div>
+                    <div class="row">
+                        @yield('content')
+                    </div>
                 </div>
                 <footer class="footer">
                     <div class="container-fluid d-flex justify-content-between">
                         <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright ©
-                            bootstrapdash.com 2021</span>
-                        <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a
-                                href="https://www.bootstrapdash.com/bootstrap-admin-template/"
-                                target="_blank">Bootstrap
-                                admin template</a> from Bootstrapdash.com</span>
+                            Arhamsoft.com</span>
+                        
                     </div>
                 </footer>
             </div>

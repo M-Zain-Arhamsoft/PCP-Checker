@@ -28,21 +28,39 @@ class HomeController extends Controller
         return view('home', compact('ssb_leads'));
     }
 
+
     public function completed(Request $request)
     {
-    // $ssb_leads = SsbLead::where('is_completed',1)->get();
-    $duration = $request->input('duration');
+        $duration = $request->input('duration');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        $search_term = $request->input('search_term'); 
 
-    // Fetch records based on the selected duration
-    if ($duration == 3) {
-        $ssb_leads = SsbLead::where('is_completed', 1)->get();
-    } 
-    else if ($duration == 2) {
-        $ssb_leads = SsbLead::where('is_completed', 0)->get();
-    } 
-    else {
-        
-    }   
-    return view('home', compact('ssb_leads'));
+        $ssb_leads_query = SsbLead::query();
+
+        if ($duration == 3) {
+            $ssb_leads_query->where('is_completed', 1);
+        } elseif ($duration == 2) {
+            $ssb_leads_query->where('is_completed', 0);
+        }
+
+        if ($start_date) {
+            $ssb_leads_query->where('created_at', '>=', $start_date);
+        }
+
+        if ($end_date) {
+            $ssb_leads_query->where('updated_at', '<=', $end_date);
+        }
+
+        if ($search_term) {
+            $ssb_leads_query->where(function ($query) use ($search_term) {
+                $query->where('case_description', 'like', '%' . $search_term . '%');
+                    // ->orWhere('field2', 'like', '%' . $search_term . '%'); 
+            });
+        }
+
+        $ssb_leads = $ssb_leads_query->get();
+
+        return view('home', compact('ssb_leads'));
     }
 }

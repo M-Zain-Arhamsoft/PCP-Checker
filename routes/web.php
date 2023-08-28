@@ -29,4 +29,4 @@ Route::get('/register', function () {
 Route::middleware('notLoggedIn')->get('/', function () {
     return redirect('/login');
 });
-Route::get('/completed', [App\Http\Controllers\HomeController::class, 'completed'])->name('completed');
+Route::post('/filter', [App\Http\Controllers\HomeController::class, 'completed'])->name('completed');
