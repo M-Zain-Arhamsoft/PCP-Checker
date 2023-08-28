@@ -19,13 +19,13 @@
                                 <label for="join"
                                     class="col-md-1 col-form-label text-md-end">{{ __('Select Start Date') }}</label>
                                 <div class="col-md-3">
-                                    <input type="datetime-local" class="form-control" name="start_date" placeholder="select start_date">
+                                    <input type="datetime-local" class="form-control" name="start_date" placeholder="yyyy-mm-dd">
                                 </div>
 
                                 <label for="join"
                                     class="col-md-1 col-form-label text-md-end">{{ __('Select End Date') }}</label>
                                 <div class="col-md-3">
-                                    <input type="datetime-local" class="form-control" name="end_date" placeholder="select end_date">
+                                    <input type="datetime-local" class="form-control" name="end_date" placeholder="yyyy-mm-dd">
                                 </div>
 
                                 <label for="join"
