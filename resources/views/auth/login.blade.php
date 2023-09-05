@@ -34,6 +34,7 @@
                             <h6 class="font-weight-light">Sign in to continue.</h6>
                             <form class="pt-3" method="POST" action="{{ route('login') }}">
                                 @csrf
+                                
                                 <div class="form-group">
                                     <input type="email"
                                         class="form-control form-control-lg @error('email') is-invalid @enderror"

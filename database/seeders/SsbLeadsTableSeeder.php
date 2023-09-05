@@ -21,6 +21,7 @@ class SsbLeadsTableSeeder extends Seeder
                 'case_id' => 123,
                 'uid' => 'UID_'.$i,
                 'source_id' => 'Source_'.$i,
+                'docs' => 'null'
                 // Add more fields with default values here
 
                 // ...

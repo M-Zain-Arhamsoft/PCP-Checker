@@ -1,27 +1,27 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
-    <!-- plugins:css -->
+    <title>PCP Checker Home</title>
+
     <link rel="stylesheet" href="{{ Storage::url('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ Storage::url('assets/vendors/css/vendor.bundle.base.css') }}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="{{ Storage::url('assets/css/style.css') }}">
-    <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ Storage::url('assets/images/favicon.ico') }}" />
+
+    <style>
+        .navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .dropdown-menu.navbar-dropdown .dropdown-item:hover {
+            color: #000;
+        }
+    </style>
 </head>
 <body>
     <!--Slicing starts from here-->
     <div class="container-scroller">
-        <div class="row p-0 m-0 proBanner" id="proBanner" style="display: none">
+        <div class="row p-0 m-0 proBanner" id="proBanner" style="display:none">
             <div class="col-md-12 p-0 m-0">
                 <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
                     <div class="ps-lg-1">
@@ -58,7 +58,7 @@
                         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="nav-profile-text">
-                                <p class="mb-1 text-black">David Greymaax</p>
+                                <p class="mb-1 text-black">{{ Auth::user()->name }}</p>
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -82,15 +82,20 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ route('home') }}">
                             <span class="menu-title">Dashboard</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/mdi.html">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
                             <span class="menu-title">Logout</span>
                             <i class="mdi mdi-logout menu-icon"></i>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </a>
                     </li>
                 </ul>
@@ -103,19 +108,17 @@
                                 <i class="mdi mdi-home"></i>
                             </span> Dashboard
                         </h3>
+                       
                     </div>
-                   <div class="row">
-                    @yield('content')
-                   </div>
+                    <div class="row">
+                        @yield('content')
+                    </div>
                 </div>
                 <footer class="footer">
                     <div class="container-fluid d-flex justify-content-between">
                         <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright ©
-                            bootstrapdash.com 2021</span>
-                        <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a
-                                href="https://www.bootstrapdash.com/bootstrap-admin-template/"
-                                target="_blank">Bootstrap
-                                admin template</a> from Bootstrapdash.com</span>
+                            Arhamsoft 2023</span>
+                       
                     </div>
                 </footer>
             </div>
@@ -181,6 +184,7 @@
             </div>
         </nav>
 
+
         <main class="py-4">
            
         </main>
@@ -193,6 +197,9 @@
     <script src="{{ Storage::url('assets/js/off-canvas.js') }}"></script>
     <script src="{{ Storage::url('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ Storage::url('assets/js/misc.js') }}"></script>
+    <script>
+        window.csrfToken = "{{csrf_token()}}";
+    </script>
 </body>
 
 </html>
